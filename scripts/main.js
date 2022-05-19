@@ -11,7 +11,21 @@ function getScore(objective, player, { minimum, maximum } = {}) {
         return;
     }
 }
-
+function convert(rank) {
+  try {
+    rank = rank.replace('Rank:', '');
+    rank = rank.replace('[', '');
+    rank = rank.replace(']', '');
+    const middleText = rank.split('%:')[1].split(':%')[0]
+    const score = 3
+    rank = rank.replace(middleText, score);
+    rank = rank.replace('%:', '');
+    rank = rank.replace(':%', '');
+    return rank;
+  } catch (error) {
+    console.log("error")
+  }
+}
 function removeRanks(player) {
   let tags = player.getTags();
   tags.forEach(t => {
@@ -42,53 +56,20 @@ World.events.beforeChat.subscribe(msg => {
     }
   }
 
-
   for (const tag of tags) {
     if (style === 0 && tag.startsWith('Rank:')) {
-      rank = tag.replace('Rank:', '');
-      try {
-        const middleText = rank.split('%:')[1].split(':%')[0]
-        const score = getScore(middleText, player)
-        rank = rank.replace(middleText, score);
-        rank = rank.replace('%:', '');
-        rank = rank.replace(':%', '');
-      } catch (error) {}
+      rank = convert(rank)
     } else if (style === 1 && tag.startsWith('Rank:')) {
-      rank = tag.replace('Rank:', '');
-      rank = rank.replace('[', '');
-      rank = rank.replace(']', '');
-      try {
-        const middleText = rank.split('%:')[1].split(':%')[0]
-        const score = getScore(middleText, player)
-        rank = rank.replace(middleText, score);
-        rank = rank.replace('%:', '');
-        rank = rank.replace(':%', '');
-      } catch (error) {}
+      rank = convert(rank)
       rank = rank.replaceAll('--', '§r][§r');
       rank = '§r[§r' + rank + '§r]§r'
     } else if (style === 2 && tag.startsWith('Rank:')) {
-      rank = tag.replace('Rank:', '');
-      rank = rank.replace('[', '');
-      rank = rank.replace(']', '');
-      try {
-        const middleText = rank.split('%:')[1].split(':%')[0]
-        const score = getScore(middleText, player)
-        rank = rank.replace(middleText, score);
-        rank = rank.replace('%:', '');
-        rank = rank.replace(':%', '');
-      } catch (error) {}
+      rank = convert(rank)
+      rank = rank.replaceAll('--', '§8§l][§r');
       rank = '§8§l[§b' + rank + '§8§l]§r'
     } else if (style === 3 && tag.startsWith('Rank:')) {
-      rank = tag.replace('Rank:', '');
-      rank = rank.replace('[', '');
-      rank = rank.replace(']', '');
-      try {
-        const middleText = rank.split('%:')[1].split(':%')[0]
-        const score = getScore(middleText, player)
-        rank = rank.replace(middleText, score);
-        rank = rank.replace('%:', '');
-        rank = rank.replace(':%', '');
-      } catch (error) {}
+      rank = convert(rank)
+      rank = rank.replaceAll('--', '§f§l][§r');
       rank = '§f§l[§7' + rank + '§f§l]§r'
     }
   }
