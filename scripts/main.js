@@ -11,6 +11,7 @@ function getScore(objective, player, { minimum, maximum } = {}) {
         return;
     }
 }
+
 function convert(rank) {
   try {
     rank = rank.replace('Rank:', '');
@@ -26,6 +27,7 @@ function convert(rank) {
     console.log("error")
   }
 }
+
 function removeRanks(player) {
   let tags = player.getTags();
   tags.forEach(t => {
@@ -43,7 +45,6 @@ World.events.beforeChat.subscribe(msg => {
   let realmbot = true;
   let rank;
   
-
   if (!rank) {
     if (style === 0) {
       rank = '[Member]'
@@ -92,15 +93,11 @@ World.events.beforeChat.subscribe(msg => {
 World.events.beforeItemUse.subscribe(eventdata => {
   let { item, source } = eventdata;
 
-  if (!(source instanceof Player)) {
+  if (!(source instanceof Player) || !source.hasTag("ChatStaff")) {
     return;
   }
   
   if (item.id === "minecraft:compass" && item.data === 101) {
-
-    if (!source.hasTag("ChatStaff")) {
-      return;
-    }
 
     let style = ["No Theme", "Basic Theme", "Dark Theme", "Light Theme"];
     let players = ["Optional"];
