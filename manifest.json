@@ -27,7 +27,7 @@
 		},
 		{
 			"description": "Gametest Features",
-			"type": "javascript",
+			"type": "script",
 			"uuid": "1326c87b-37f3-4543-9f0f-0d03893134e1",
 			"version": [
 				0,
