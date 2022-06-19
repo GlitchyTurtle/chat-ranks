@@ -108,7 +108,7 @@ World.events.beforeItemUse.subscribe(eventdata => {
 
     let mainMenu = new ActionFormData();
     mainMenu.title("Chat Ranks Menu:");
-    mainMenu.body("Choose your bending style here! Your level will be reset upon choosing though.");
+    mainMenu.body("Edit ranks here! You can insert scoreboards using %:scoreboardname:%");
     mainMenu.button("Assign Ranks", "textures/items/compass_item");
     mainMenu.button("Global Settings", "textures/items/comparator");
 
